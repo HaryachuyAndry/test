@@ -1,0 +1,48 @@
+@import '../../assets/colors/colors.scss';
+
+
+.comparison{
+    display: flex;
+    justify-content: space-between;
+    &__content{
+        display: flex;
+        flex:1;
+        overflow: scroll;
+        flex-wrap: wrap;
+        height: 300px;
+        justify-content: space-around;
+        &__item{
+            margin: 10px;
+            color: $textGray;
+            font-family: Roboto;
+            
+        }
+    }
+    &__selectors{
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin-left: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+    &__dateBlock{
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        &__title{
+            font-family: Roboto;
+            color: $textGray;
+            font-weight: 500;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+    }
+    &__itemSelector{
+        display: flex;
+       flex-direction: column;
+       width: 331px;
+       margin-bottom: 12px;
+    }
+}

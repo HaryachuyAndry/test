@@ -1,0 +1,11 @@
+@import '../../assets/colors/colors.scss';
+
+.react-calendar{
+    border-radius: 12px;
+    &__tile--now{
+        background: $secondary;
+    }
+    &__tile--active{
+        background-color: $primary;
+    }
+}

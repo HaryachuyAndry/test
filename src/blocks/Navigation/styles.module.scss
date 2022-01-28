@@ -1,0 +1,35 @@
+@import "../../assets/colors/colors.scss";
+
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    height: 68px;
+    &__link{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        background-color: $secondary;
+        justify-content: center;
+        text-decoration: none;
+        font-family: Roboto;
+        font-weight: 400;
+        color: $primary;
+        &>svg{
+            fill:$primary;
+            margin-right: 8px;
+            
+        }
+    }
+    &__link[class~="active"] {
+        background-color: white;
+        font-weight: 500;
+        color:$black;
+        &>svg{
+            margin-right: 8px;
+            fill: $black;
+        }
+    }
+
+
+}

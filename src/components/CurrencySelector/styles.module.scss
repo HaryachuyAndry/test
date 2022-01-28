@@ -1,0 +1,74 @@
+@import '../../assets/colors/colors.scss';
+
+.selector{
+    display: flex;
+    border: 0.5px solid rgba($black,0.3);
+    max-width: 331px;
+    height: 56px;
+    border-radius: 8px;
+    flex: 1;
+    box-shadow: $defaultShadow;
+    align-items: center;
+    padding: 0 16px 0 16px ;
+    position: relative;
+    &_focus{
+        border-color: $primary;
+    }
+    &_focus>&__list{
+        display: block;
+    }
+    &__input{
+        border:none;
+        outline: none;
+        font-size: 24px;
+        font-family: Roboto;
+        font-weight: 400;
+        flex: 1;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0; 
+        }
+    }
+    &__list{
+        display: none;
+        margin: 0px;
+        width: 100%;
+        position: absolute;
+        top:60px;
+        height: 150px;
+        overflow: scroll;
+        padding-left: 0;
+        border-radius: 12px;
+        box-shadow: $defaultShadow;
+        padding: 12px;
+        left:0;
+        background-color: $white;
+        cursor: pointer;
+        z-index: 2;
+        &__item{
+            list-style-type: none;
+            font-family: Roboto;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            &__symbol{
+                display: block;
+                text-align: center;
+                width: 30px;
+                margin-right: 6px;
+            }
+            &:hover{
+                background-color: $secondary;
+            }
+        }
+    }
+    &__value{
+        font-family: Roboto;
+        font-size: 20px;
+        color:$textGray;
+        &__symbol{
+            color: black;
+        }
+    }
+}
