@@ -1,9 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import ICONS from '../assets/icons';
-import Chart from '../pages/Charts/Comparison';
-import Comparison from '../pages/Comparison';
-import Historical from '../pages/Historical';
-import Main from '../pages/Main';
+import { Comparison, Main, Charts, Historical } from '../pages';
 
 export const routes = [
   {
@@ -26,7 +23,7 @@ export const routes = [
   },
   {
     path: 'graph',
-    component: <Chart />,
+    component: <Charts />,
     name: 'Charts',
     icon: ICONS.navigation.charts,
   },

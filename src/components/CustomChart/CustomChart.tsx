@@ -34,15 +34,14 @@ function CustomChart({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="date" />
           <YAxis />
           <Tooltip />
           <Legend />
-
           <Line
             type="monotone"
             dataKey={'value'}
-            stroke="#82ca9d"
+            stroke="#2C66B8"
             name={code}
           />
         </LineChart>

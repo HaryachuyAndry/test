@@ -17,6 +17,7 @@ function CustomCalendar({ onChange, value, range = false }: ICustomCalendar) {
         onChange={onChange}
         calendarType="US"
         className="react-calendar"
+        maxDate={new Date()}
       />
     </div>
   );

@@ -2,21 +2,37 @@
 
 .selector{
     display: flex;
-    border: 0.5px solid rgba($black,0.3);
+    flex-direction: column;
     max-width: 331px;
-    height: 56px;
-    border-radius: 8px;
-    flex: 1;
-    box-shadow: $defaultShadow;
-    align-items: center;
-    padding: 0 16px 0 16px ;
+    flex:1;
     position: relative;
+    &__container{
+        display: flex;
+        border: 0.5px solid rgba($black,0.3);
+        width: 100%;
+        height: 56px;
+        border-radius: 8px;
+        box-shadow: $defaultShadow;
+        align-items: center;
+        padding: 0 16px 0 16px ;
+        
+    }
     &_focus{
-        border-color: $primary;
+     border-color: $primary;
     }
-    &_focus>&__list{
-        display: block;
+    &_focus~&__list{
+        height: 150px;
+        padding: 12px;
     }
+    &_focus>&__arrow{
+        transform: rotate(0);
+    }
+    &__arrow{
+        margin-left: auto;
+        transform: rotate(90deg);
+        transition: 0.4s ease all;
+    }
+
     &__input{
         border:none;
         outline: none;
@@ -31,17 +47,16 @@
         }
     }
     &__list{
-        display: none;
-        margin: 0px;
+        height: 0;
         width: 100%;
+        transition: 0.4s ease all;
         position: absolute;
-        top:60px;
-        height: 150px;
+        top:70px;
         overflow: scroll;
         padding-left: 0;
         border-radius: 12px;
         box-shadow: $defaultShadow;
-        padding: 12px;
+        padding: 0;
         left:0;
         background-color: $white;
         cursor: pointer;
@@ -70,5 +85,13 @@
         &__symbol{
             color: black;
         }
+    }
+    &__label{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 500;
+        color:$textGray;
+        align-self: center;
+        margin-bottom: 4px;   
     }
 }

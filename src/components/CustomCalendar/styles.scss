@@ -2,6 +2,7 @@
 
 .react-calendar{
     border-radius: 12px;
+    overflow: hidden;
     &__tile--now{
         background: $secondary;
     }

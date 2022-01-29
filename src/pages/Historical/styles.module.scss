@@ -26,9 +26,10 @@
         display: flex;
         flex-direction: column;
         flex: 1;
-        align-items: center;
+        max-width: 331px;
         &__button{
             margin-top: 20px;
+            align-self: center;
         }
     }
 }

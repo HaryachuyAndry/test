@@ -3,6 +3,7 @@ import Dollar from './navigation/dollar';
 import Comparison from './navigation/comparison';
 import History from './navigation/History';
 import Swap from './utils/swap';
+import Arrow from './utils/arrow';
 
 const ICONS = {
   navigation: {
@@ -13,6 +14,7 @@ const ICONS = {
   },
   utils: {
     swap: <Swap />,
+    arrow: <Arrow />,
   },
 };
 

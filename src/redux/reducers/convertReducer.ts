@@ -2,7 +2,7 @@
 
 import { currencyList } from "../../constans/currencyList";
 import { ICurrency, IResult } from "../../models/interfaceIcurrency";
-import { ActionTypes } from "../actions/actionTypes";
+import { ActionTypesConvert } from "../actions/actionTypes";
 
 interface IInitState{
     fromCurrency:ICurrency,
@@ -12,23 +12,23 @@ interface IInitState{
 }
 
 interface SetFromCurrencyAction{
-    type:ActionTypes.SET_FROM_CURRENCY
+    type:ActionTypesConvert.SET_FROM_CURRENCY
     payload:ICurrency
 }
 interface SetToCurrencyAction{
-    type:ActionTypes.SET_TO_CURRENCY
+    type:ActionTypesConvert.SET_TO_CURRENCY
     payload:ICurrency
 }
 interface SetAmount{
-    type:ActionTypes.SET_AMOUNT
+    type:ActionTypesConvert.SET_AMOUNT
     payload:number
 }
 interface FetchConvert{
-    type:ActionTypes.FETCH_CONVERT
+    type:ActionTypesConvert.FETCH_CONVERT
     payload:IResult
 }
 interface SetSwapCurrency{
-    type:ActionTypes.SET_SWAP_CURRENCY
+    type:ActionTypesConvert.SET_SWAP_CURRENCY
 }
 
 const initialState: IInitState = {
@@ -42,15 +42,15 @@ type Action = SetFromCurrencyAction | SetToCurrencyAction | FetchConvert | SetAm
 
 const convertReducer = (state = initialState, action:Action): IInitState => { 
     switch (action.type) {
-        case ActionTypes.SET_FROM_CURRENCY:
+        case ActionTypesConvert.SET_FROM_CURRENCY:
           return {...state, fromCurrency:action.payload}
-        case ActionTypes.SET_TO_CURRENCY:
+        case ActionTypesConvert.SET_TO_CURRENCY:
           return {...state, toCurrency:action.payload}
-        case ActionTypes.SET_AMOUNT:
+        case ActionTypesConvert.SET_AMOUNT:
           return {...state, amount:action.payload}
-        case ActionTypes.FETCH_CONVERT:
+        case ActionTypesConvert.FETCH_CONVERT:
             return {...state, result:action.payload}
-        case ActionTypes.SET_SWAP_CURRENCY: 
+        case ActionTypesConvert.SET_SWAP_CURRENCY: 
             return {...state, fromCurrency:state.toCurrency, toCurrency:state.fromCurrency}
       default:
         return state;

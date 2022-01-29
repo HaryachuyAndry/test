@@ -2,19 +2,23 @@
 
 .container{
     display: flex;
-    flex: 1;
-    border: 0.5px solid rgba($black,0.3);
+    flex-direction: column;
     max-width: 331px;
-    height: 56px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: $defaultShadow;
-    align-items: center;
-    padding: 0 16px 0 16px ;
+    flex: 1;
+    &__label{
+        display: flex;
+        border: 0.5px solid rgba($black,0.3);
+        height: 56px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: $defaultShadow;
+        align-items: center;
+        padding: 0 16px 0 16px ;
     &_focus{
         border-color: $primary;
     }
     &__input{
+        flex: 1;
         border:none;
         outline: none;
         font-size: 20px;
@@ -26,5 +30,19 @@
             -webkit-appearance: none;
             margin: 0; 
         }
+    }
+    }
+    &__title{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 500;
+        color:$textGray;
+        align-self: center;
+        margin-bottom: 4px;   
+    }
+    &__label>span{
+        font-family: Roboto;
+
+        font-size: 20px;
     }
 }

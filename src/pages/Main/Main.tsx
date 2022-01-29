@@ -1,14 +1,11 @@
-/* eslint-disable */
-
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { convert } from '../../api/convert';
 import CurrencySelector from '../../components/CurrencySelector/CurrencySelector';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import Modal from '../../components/ModalLayout';
 import SwapButton from '../../components/SwapButton/SwapButton';
-import { currencyList } from '../../constans/currencyList';
 import { useTypedSelector } from '../../hooks';
 import { ICurrency } from '../../models/interfaceIcurrency';
 import {
@@ -19,19 +16,6 @@ import {
   swapCurrency,
 } from '../../redux/actions/actionsConvert';
 import styles from './styles.module.scss';
-
-interface IField {
-  value: number;
-  symbol: string;
-  label: string;
-  code: string;
-}
-
-interface IResult {
-  from: IField;
-  to: IField;
-  rate: number;
-}
 
 function Main() {
   const dispatch = useDispatch();
@@ -50,7 +34,7 @@ function Main() {
 
   const getHistory = () => {
     const historyArray = localStorage.getItem('convertHistory')
-      ? localStorage.getItem('convertHistory')?.split('|')
+      ? localStorage.getItem('convertHistory')?.split('|').reverse()
       : [];
 
     setHistory(historyArray);
@@ -59,10 +43,8 @@ function Main() {
 
   useEffect(() => {
     getHistory();
-
-    addEventListener('storage', getHistory);
-
-    return () => removeEventListener('storage', getHistory);
+    window.addEventListener('storage', getHistory);
+    return () => window.removeEventListener('storage', getHistory);
   }, []);
 
   return (
@@ -73,8 +55,10 @@ function Main() {
             value={amount}
             onChange={(v: number) => dispatch(setAmount(v))}
             symbol={fromCurrency.symbol}
+            label="Amount"
           />
           <CurrencySelector
+            label="From"
             value={fromCurrency}
             onChangeValue={(v: ICurrency) => {
               dispatch(setFromCurrency(v));
@@ -82,6 +66,7 @@ function Main() {
           />
           <SwapButton onClick={() => dispatch(swapCurrency())} />
           <CurrencySelector
+            label="To"
             value={toCurrency}
             onChangeValue={(v: ICurrency) => {
               dispatch(setToCurrency(v));
@@ -113,7 +98,7 @@ function Main() {
               onClick={() => dispatch(fetchConvert())}
             />
 
-            <span onClick={toggleShowModal}>Convertations History</span>
+            <span onClick={toggleShowModal}>Convert History</span>
           </div>
         </div>
       </div>
@@ -126,18 +111,12 @@ function Main() {
         <ul>
           {history?.map((item, index) => {
             const data = JSON.parse(item);
-
+            console.log(data);
             return (
-              <li
-                key={index}
-                onClick={() => {
-                  {
-                    toggleShowModal();
-                    fetchConvert(data);
-                  }
-                }}
-              >
-                {data.amount} {data.from} to {data.to}
+              <li key={index}>
+                {moment(data.date).format('MMMM Do YYYY, h:mm:ss a')} -{' '}
+                {data.amount} {data.fromCurrency.code} To {data.toCurrency.code}{' '}
+                {data.result}
               </li>
             );
           })}

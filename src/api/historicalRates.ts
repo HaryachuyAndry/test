@@ -1,3 +1,4 @@
+import moment from "moment";
 import axios from "./axios";
 
 interface IHistoricalRates {
@@ -8,6 +9,6 @@ interface IHistoricalRates {
 export const historicalRates = ({ date,currency }:IHistoricalRates) => {
   return axios({
     method: "get",
-    url: `/${date}?${currency}`,
+    url: `/${moment(date).format('YYYY-MM-DD')}?base=${currency}`,
   });
 };

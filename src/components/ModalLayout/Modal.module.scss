@@ -24,7 +24,7 @@
     max-width: 90%;
     min-height: 213px;
     max-height: 90%;
-    max-width: 400px;
+    max-width: 520px;
     width: 80%;
     background-color: $white;
     text-align: center;
@@ -58,11 +58,11 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .modal {
     &__content {
       padding: 24px;
-      min-height: unset;
+      min-height: unset;  
     }
   }
 }

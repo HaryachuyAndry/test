@@ -1,7 +1,7 @@
 @import '../../assets/colors/colors.scss';
 
 
-.comparison{
+.chart{
     display: flex;
     justify-content: space-between;
     &__content{
@@ -22,9 +22,10 @@
         display: flex;
         flex: 1;
         flex-direction: column;
-        margin-left: 20px;
+ 
         align-items: center;
         justify-content: center;
+        max-width: 331px;
     }
     &__dateBlock{
         display: flex;
@@ -39,10 +40,18 @@
             margin-bottom: 16px;
         }
     }
-    &__itemSelector{
+
+    &__selectors{
         display: flex;
+        height: 250px;
        flex-direction: column;
        width: 331px;
+       align-self: center;
+       align-items: stretch;
        margin-bottom: 12px;
+        justify-items: center;
+        &>button{
+            align-self: center;
+        }
     }
 }

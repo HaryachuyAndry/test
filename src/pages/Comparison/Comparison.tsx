@@ -1,39 +1,23 @@
-import React, { useState } from 'react';
-import { timeSeries } from '../../api/timeseries';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import CurrencySelector from '../../components/CurrencySelector/CurrencySelector';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import CustomCalendar from '../../components/CustomCalendar/CustomCalendar';
-import { currencyList } from '../../constans/currencyList';
-import { ICurrency } from '../../models/interfaceIcurrency';
+import { useTypedSelector } from '../../hooks';
+import {
+  fetchComparison,
+  setComparisonBaseCurrency,
+  setComparisonCurrentCurrency,
+  setComparisonRangeDate,
+} from '../../redux/actions/actionComparison';
 import styles from './styles.module.scss';
 
-interface IResponse {
-  arrRes: Array<[string, number | unknown]>;
-  currency: string;
-}
-
 function Comparison() {
-  const [baseCurrency, setBaseCurrency] = useState<ICurrency>(currencyList[0]);
-  const [currency, setCurrency] = useState<ICurrency>(currencyList[0]);
-  const [response, setResponse] = useState<IResponse>();
-  const [rangeDate, setRangeDate] = useState<Array<Date>>([
-    new Date(),
-    new Date(),
-  ]);
+  const dispatch = useDispatch();
 
-  const fetchComparison = async () => {
-    const { data } = await timeSeries({
-      startDate: rangeDate[0],
-      endDate: rangeDate[1],
-      base: baseCurrency.code,
-      currency: currency.code,
-    });
-    console.log(data);
-    const arrRes: Array<[string, number | unknown]> = Object.keys(
-      data.rates
-    ).map((key) => [key, Object.values(data.rates[key])[0]]);
-    setResponse({ arrRes, currency: currency.code });
-  };
+  const { baseCurrency, currentCurrency, response } = useTypedSelector(
+    (state) => state.comparisonReducer
+  );
 
   return (
     <div className={styles.comparison}>
@@ -42,33 +26,31 @@ function Comparison() {
         <CustomCalendar
           range={true}
           onChange={(v) => {
-            Array.isArray(v) && setRangeDate(v);
+            Array.isArray(v) && dispatch(setComparisonRangeDate(v));
           }}
         />
       </div>
       <div className={styles.comparison__selectors}>
-        <div className={styles.comparison__itemSelector}>
-          <span>base currency</span>
-          <CurrencySelector
-            value={baseCurrency}
-            onChangeValue={(v) => {
-              setBaseCurrency(v);
-            }}
-          />
-        </div>
-        <div className={styles.comparison__itemSelector}>
-          <span>current currency</span>
-          <CurrencySelector
-            value={currency}
-            onChangeValue={(v) => {
-              setCurrency(v);
-            }}
-          />
-        </div>
+        <CurrencySelector
+          label="Base currency"
+          value={baseCurrency}
+          onChangeValue={(v) => {
+            dispatch(setComparisonBaseCurrency(v));
+          }}
+        />
+
+        <CurrencySelector
+          label="Current currency"
+          value={currentCurrency}
+          onChangeValue={(v) => {
+            dispatch(setComparisonCurrentCurrency(v));
+          }}
+        />
+
         <CustomButton
           text="Send"
           onClick={() => {
-            fetchComparison();
+            dispatch(fetchComparison());
           }}
         />
       </div>
